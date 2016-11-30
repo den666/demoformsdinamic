@@ -1,0 +1,45 @@
+/*** Mixins ***/
+@import "mixins";
+
+/*** Colors ***/
+$white-color: #ffffff;
+$black-color: #000000;
+
+$brand: color("color-brand", "base") !default;
+$secondary: color("color-secondary", "base") !default;
+$warning: color("color-warning", "base") !default;
+$color-danger: color("color-danger", "base") !default;
+$color-info: color("color-info", "base") !default;
+$color-success: color("color-success", "base") !default;
+
+/*** Global ***/
+// Media Query Ranges
+$small-screen-up: 601px !default;
+$medium-screen-up: 993px !default;
+$large-screen-up: 1201px !default;
+$extra-large-screen-down: 1309px !default;
+$extra-large-screen-up: 1310px !default;
+$small-screen: 600px !default;
+$small-half-screen: 450px !default;
+$medium-screen: 992px !default;
+$medium-half-screen: 768px !default;
+$large-screen: 1200px !default;
+
+$medium-and-up: "only screen and (min-width : #{$small-screen-up})" !default;
+$large-and-up: "only screen and (min-width : #{$medium-screen-up})" !default;
+$extra-large-and-up: "only screen and (min-width : #{$extra-large-screen-up})" !default;
+$large-only: "only screen and (min-width : #{$medium-screen}) and (max-width : #{$large-screen})" !default;
+$small-and-down: "only screen and (max-width : #{$small-screen})" !default;
+$medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
+$large-and-down: "only screen and (max-width : #{$large-screen})" !default;
+$extra-large-and-down: "only screen and (max-width : #{$extra-large-screen-down})" !default;
+$medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
+
+$base-size: 15px;
+
+$h1-fontsize: 2.5rem !default;
+$h2-fontsize: 2rem !default;
+$h3-fontsize: 1.75rem !default;
+$h4-fontsize: 1.40rem !default;
+$h5-fontsize: 1.20rem !default;
+$h6-fontsize: 1rem !default;
