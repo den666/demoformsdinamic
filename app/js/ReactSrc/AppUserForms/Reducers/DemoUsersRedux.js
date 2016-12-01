@@ -3,7 +3,7 @@
  */
 
 
-import ReduxConstants from '../Utils/Constants/ReduxConstants'
+import ReduxConstants from '../../Utils/Constants/ReduxConstants'
 
 const initialState = {
     role: 0,

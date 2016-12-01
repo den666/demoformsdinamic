@@ -31,8 +31,8 @@ gulp.task('browser-sync', function () {
 
 var files = [
     {
-        input      : ['./app/js/usersForms.js'],
-        output     : 'usersFormsBuilt.js',
+        input      : ['./app/js/UsersForms.js'],
+        output     : 'UsersFormsBuilt.js',
         destination: './app/js/dist'
     }
 ];
