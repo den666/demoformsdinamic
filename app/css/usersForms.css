@@ -355,3 +355,226 @@ h6, .size-h6 {
 .separator {
   width: 100%;
   height: 1px; }
+
+.latam-input-box {
+  position: relative;
+  width: 100%; }
+  .latam-input-box label {
+    color: #eeeeee;
+    position: absolute;
+    top: -1.2rem;
+    left: 0; }
+    .latam-input-box label.required {
+      padding-left: 1.5rem; }
+      .latam-input-box label.required .icon-status {
+        position: absolute;
+        left: 0;
+        top: 0; }
+        .latam-input-box label.required .icon-status i {
+          font-size: 1rem;
+          line-height: 1.5rem;
+          width: 1.5rem;
+          height: 1.5rem;
+          overflow: hidden;
+          position: absolute;
+          left: 0;
+          top: -.25rem;
+          -webkit-transition: all 0.5s;
+          -moz-transition: all 0.5s;
+          -o-transition: all 0.5s;
+          -ms-transition: all 0.5s;
+          transition: all 0.5s; }
+          .latam-input-box label.required .icon-status i.hidden {
+            top: -1rem;
+            opacity: 0; }
+  .latam-input-box .disable-box {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2; }
+
+.latam-dropdown {
+  position: relative;
+  width: 100%; }
+  .latam-dropdown label {
+    color: #eeeeee;
+    position: absolute;
+    top: -1.2rem;
+    left: 0; }
+    .latam-dropdown label.required {
+      padding-left: 1.5rem; }
+      .latam-dropdown label.required .icon-status {
+        position: absolute;
+        left: 0;
+        top: 0; }
+        .latam-dropdown label.required .icon-status i {
+          font-size: 1rem;
+          line-height: 1.5rem;
+          width: 1.5rem;
+          height: 1.5rem;
+          overflow: hidden;
+          position: absolute;
+          left: 0;
+          top: -.25rem;
+          -webkit-transition: all 0.5s;
+          -moz-transition: all 0.5s;
+          -o-transition: all 0.5s;
+          -ms-transition: all 0.5s;
+          transition: all 0.5s; }
+          .latam-dropdown label.required .icon-status i.hidden {
+            top: -1rem;
+            opacity: 0; }
+  .latam-dropdown .latam-dropdown-button {
+    position: relative;
+    width: 100%;
+    height: 3rem;
+    line-height: 3rem;
+    background: none transparent;
+    color: #e0e0e0;
+    text-transform: lowercase;
+    text-align: left;
+    padding: 0 1px; }
+    .latam-dropdown .latam-dropdown-button.disable {
+      color: #f5f5f5; }
+    .latam-dropdown .latam-dropdown-button:focus {
+      border-top: 1px solid #eeeeee; }
+    @media only screen and (min-width: 601px) and (max-width: 992px) {
+      .latam-dropdown .latam-dropdown-button {
+        font-size: .8rem; } }
+    .latam-dropdown .latam-dropdown-button i.right {
+      width: 1.5rem;
+      overflow: hidden;
+      height: 2rem; }
+  .latam-dropdown .latam-dropdown-content {
+    background-color: #ffffff;
+    margin: 0;
+    display: none;
+    min-width: 100px;
+    opacity: 0;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    will-change: width, height; }
+    .latam-dropdown .latam-dropdown-content.bottom-dropdown {
+      top: auto;
+      bottom: -1px; }
+      .latam-dropdown .latam-dropdown-content.bottom-dropdown .over-item-bg .over-item .search-title {
+        top: auto;
+        bottom: 0; }
+      .latam-dropdown .latam-dropdown-content.bottom-dropdown .over-item-bg .over-item .search-input {
+        top: auto;
+        bottom: 0; }
+      .latam-dropdown .latam-dropdown-content.bottom-dropdown .over-item-bg .over-item ul {
+        margin: 0 0 3rem; }
+    @media only screen and (max-width: 992px) {
+      .latam-dropdown .latam-dropdown-content {
+        position: fixed;
+        top: 0 !important;
+        bottom: auto !important;
+        left: 0;
+        height: 100%;
+        z-index: 1200;
+        padding: 4rem 0 0;
+        background: none transparent; } }
+    .latam-dropdown .latam-dropdown-content.active {
+      display: block;
+      opacity: 1; }
+    @media only screen and (max-width: 992px) {
+      .latam-dropdown .latam-dropdown-content .over-item-bg {
+        background: #fafafa;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 2rem; } }
+    @media only screen and (max-width: 992px) {
+      .latam-dropdown .latam-dropdown-content .over-item-bg .over-item {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        padding-top: 6rem; } }
+    .latam-dropdown .latam-dropdown-content .over-item-bg .over-item .search-title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      background: #bdbdbd;
+      color: #ffffff;
+      text-align: center;
+      padding: 11px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px; }
+      @media only screen and (max-width: 992px) {
+        .latam-dropdown .latam-dropdown-content .over-item-bg .over-item .search-title {
+          top: 0 !important;
+          bottom: auto !important; } }
+    .latam-dropdown .latam-dropdown-content .over-item-bg .over-item .search-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      background: #ffffff; }
+      @media only screen and (max-width: 992px) {
+        .latam-dropdown .latam-dropdown-content .over-item-bg .over-item .search-input {
+          top: 3rem !important;
+          bottom: auto !important; } }
+      .latam-dropdown .latam-dropdown-content .over-item-bg .over-item .search-input input {
+        padding: 0 1rem;
+        box-sizing: border-box;
+        margin-bottom: 0; }
+        @media only screen and (max-width: 992px) {
+          .latam-dropdown .latam-dropdown-content .over-item-bg .over-item .search-input input {
+            border-top: 0 !important; } }
+    .latam-dropdown .latam-dropdown-content .over-item-bg .over-item ul {
+      margin: 3rem 0 0;
+      max-height: 20rem;
+      overflow-y: auto;
+      display: block;
+      width: 100%; }
+      @media only screen and (max-width: 992px) {
+        .latam-dropdown .latam-dropdown-content .over-item-bg .over-item ul {
+          max-height: 100%;
+          margin: 0 !important;
+          padding: 0; } }
+      .latam-dropdown .latam-dropdown-content .over-item-bg .over-item ul li {
+        clear: both;
+        color: #e0e0e0;
+        cursor: pointer;
+        line-height: 1.5rem;
+        width: 100%;
+        text-align: left;
+        text-transform: none;
+        position: relative;
+        border-bottom: 1px solid #f5f5f5; }
+        .latam-dropdown .latam-dropdown-content .over-item-bg .over-item ul li a {
+          font-size: 1rem;
+          color: #e0e0e0;
+          font-weight: 300;
+          display: block;
+          line-height: 1.2rem;
+          padding: .8rem 1rem; }
+          .latam-dropdown .latam-dropdown-content .over-item-bg .over-item ul li a:focus {
+            outline: none;
+            background: #f5f5f5; }
+        .latam-dropdown .latam-dropdown-content .over-item-bg .over-item ul li:last-child {
+          border-bottom: 0; }
+        .latam-dropdown .latam-dropdown-content .over-item-bg .over-item ul li.hidden {
+          display: none; }
+  .latam-dropdown .disable-box {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2; }
