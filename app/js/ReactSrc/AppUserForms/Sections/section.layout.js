@@ -14,7 +14,7 @@ export default class Layout extends Component {
         let {children, goToHome} = this.props;
         return (
             <div className="layout">
-                <a onClick={()=>{goToHome('1111212')}}>cl</a>
+                <a onClick={goToHome}>cl</a>
                 {children}
             </div>
         )

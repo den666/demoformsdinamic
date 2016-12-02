@@ -23,7 +23,12 @@ var notify      = require('gulp-notify'); // Provides notification to both the c
 gulp.task('browser-sync', function () {
     browserSync.init({
         server: {
-            baseDir: './app'
+            baseDir: './app',
+            routes: {
+                "/usuarios": "./app",
+                "/usuarios/usuario_a": "./app",
+                "/usuarios/usuario_b": "./app"
+            }
         }
     })
 });

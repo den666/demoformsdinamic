@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 import Layout from './../Sections/section.layout'
+import ReduxConstants from '../../Utils/Constants/ReduxConstants'
 
+import {setFormActiveData} from '../Actions/ActionFormUsers'
 
 const mapStateToProps = (state) => {
     return {
@@ -17,8 +19,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        goToHome: (page) => {
-            console.log(page);
+        goToHome: () => {
+            browserHistory.push(ReduxConstants.Routes.USERS_HOME);
+            dispatch(setFormActiveData(null));
         }
     }
 };

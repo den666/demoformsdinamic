@@ -1,105 +1,122 @@
 /**
  * Created by Dennis on 7/6/16.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
+import {isValidIdentification, isEmpty, isGreaterThanDigit, hasMinimumChars, isValidEmail } from '../../Utils/Format/validationUtils'
+import {REQUIRED, EMAIL, CEDULA} from '../../Utils/Constants/InputErrorMessages'
 
-export default class InputBox extends Component{
+export default class InputBox extends React.Component{
     constructor(props){
         super(props);
         this.changeInput = this.changeInput.bind(this);
         this.state = {
-            validate: false
+            error: props.default?null:REQUIRED,
+            showError: !this.props.notShowInitialError
         };
         this.sendValue = null;
         this.validateData = this.validateData.bind(this);
+        this.getError = this.getError.bind(this);
+        this.cleanValue = this.cleanValue.bind(this);
     }
+
+    getError(value){
+        if(isEmpty(value)){
+            return this.props.errorMessageRequired || REQUIRED;
+        }
+        if(this.props.itemLength){
+            const errorMinCharacters = this.props.errorMessageItenLength || `Debe ingresar al menos ${this.props.itemLength} caracteres`;
+            if(this.props.number && this.props.itemValue && !this.props.noQuantity){
+                if(!isGreaterThanDigit(value, this.props.itemValue))
+                    return errorMinCharacters;
+            }else if(!hasMinimumChars(value, this.props.itemLength)){
+                return errorMinCharacters;
+            }
+        }
+
+        if(this.props.itemEmail && !isValidEmail(value)){
+            return this.props.errorMessageEmail || EMAIL;
+        }
+        if(this.props.cedula && !isValidIdentification(value)){
+            return this.props.errorMessageCedula || CEDULA
+        }
+        if(this.props.minimumValue && (parseInt(value) < parseInt(this.props.minimumValue))){
+            return this.props.errorMessageMinimumValue || `Debe ingresar un valor mayor o igual a ${this.props.minimumValue}`
+        }
+        if(this.props.maximumValue && (parseInt(value) > parseInt(this.props.maximumValue))){
+            return this.props.errorMessageMaximumValue || `Debe ingresar un valor menor o igual a ${this.props.maximumValue}`
+        }
+        return null;
+    }
+
+    cleanValue(value){
+        var valueProcessed = (this.props.number && value && value && !this.props.noQuantity != '') ? value.replace(/[^0-9]/g, '') : value;
+        if(this.props.itemMaxLength){
+            if(valueProcessed.length > this.props.itemMaxLength){
+                valueProcessed = valueProcessed.substring(0, this.props.itemMaxLength);
+            }
+        }
+        if(this.props.number && value){
+            if(!this.props.noQuantity){
+                valueProcessed = parseInt(valueProcessed);
+            }
+        }
+        return valueProcessed
+    }
+
+
+
     validateData(value){
-        let {isNumber, itemLength, isAValue, itemMaxLength} = this.props;
-        // var transformedInput = isNumber ? (value && value != '' ? value.replace(/[^0-9,-/(/) ]/g, '') : value) : value;
-        var transformedInput = null;
-        if(isNumber){
-            transformedInput = value && value != '' ? value.replace(/[^0-9]/g, '') : value;
-        }
-        else{
-            transformedInput = value
-        }
-        if(itemLength){
-            var minNumber = '1';
-            for(var i=0; i< (itemLength)-1; i++){
-                minNumber = minNumber+'0'
-            }
-            if(isNumber && isAValue){
-                transformedInput = parseInt(transformedInput);
-                if(parseInt(minNumber) <= parseInt(transformedInput)){
-                    this.setState({validate: true});
-                }
-                else{
-                    this.setState({validate: false});
-                }
-            }
-            else{
-                var noSpace = transformedInput.replace(/ /g,'');
-                if(noSpace.length > (minNumber.length)-1){
-                    this.setState({validate: true});
-                }
-                else{
-                    this.setState({validate: false});
-                }
-            }
-        }
-        else{
-            var noSpace = transformedInput.replace(/ /g,'');
-            noSpace.length > 0 ? this.setState({validate: true}) : this.setState({validate: false});
-        }
-        this.sendValue = transformedInput ? transformedInput.toString() : '';
-        if(itemMaxLength){
-            if(this.sendValue.length > itemMaxLength){
-                this.sendValue = this.sendValue.substring(0, itemMaxLength);
-            }
-        }
-        return this.sendValue;
+        this.sendValue = this.cleanValue(value);
+        this.setState({error : this.getError(this.sendValue)});
+        return this.sendValue ? this.sendValue.toString() : '';
     }
+
+
     changeInput(event){
-        let {changeBox, inputId} = this.props;
-        let value = event.target.value;
-        let sendValues = this.validateData(value);
-        setTimeout(()=>{
-            changeBox(sendValues, inputId, this.state.validate);
-        }, 10);
+        this.props.changeBox(this.validateData(event.target.value), this.props.type, this.state.validate);
+        this.setState({showError: true});
+
     }
+    componentDidMount(){
+        // setTimeout(()=>{
+        //     if(this.props.default){
+        //         this.setState({
+        //             validate: true
+        //         });
+        //     }
+        // }, 800);
+    }
+
     componentWillReceiveProps(nextProps){
-        let defaultValue = nextProps.inputValue.value ? nextProps.inputValue.value : nextProps.inputValue;
+        let defaultValue = nextProps.default && nextProps.default.value ? nextProps.default.value : nextProps.default;
         if(defaultValue && (this.sendValue != defaultValue)){
             this.validateData(defaultValue.toString());
         }
+        if(!nextProps.notShowInitialError){
+            this.setState({showError:true})
+        }
     }
+
     render() {
-        let {placeholder, label, password, required, inputValue} = this.props;
-        return	<div className="latam-input-box m-t-lg m-b-lg">
-            <input onChange={this.changeInput} placeholder={placeholder} id={'input_'+label} type={password ? 'password' : 'text'} value={inputValue && typeof inputValue == 'object' ? inputValue.value : (inputValue ? inputValue : '')} className="validate"/>
-            <label className={required ? 'required' : null} htmlFor={'input_'+label}>
-                {required ?
+        var classInput = 'latam-dropdown m-b-lg';
+        if(this.props.required && this.state.error){
+            classInput += ' invalid';
+            if(this.state.showError){
+                classInput += ' showError'
+            }
+        }
+        return	<div className={classInput}>
+            <input disabled={this.props.disabled} onChange={this.changeInput} placeholder={this.props.placeholder} id={'input_'+this.props.label} type="text" value={this.props.default && typeof this.props.default == 'object' ? this.props.default.value : (this.props.default ? this.props.default : '')} className="validate"/>
+            <label className={this.props.required ? 'required' : null} htmlFor={'input_'+this.props.label}>
+                {this.props.required && this.state.showError?
                     <span className="icon-status">
-                        <i className={this.state.validate ? 'material-icons latam-success-text' : 'material-icons latam-success-text hidden'}>check</i>
-                        <i className={!this.state.validate ? 'material-icons latam-danger-text' : 'material-icons latam-warning-text hidden'}>clear</i>
+                                        <i className={!this.state.error ? 'material-icons latam-success-text' : 'material-icons latam-success-text hidden'}>check</i>
+                                        <i className={this.state.error ? 'material-icons latam-danger-text' : 'material-icons latam-warning-text hidden'}>clear</i>
                     </span>
-                : null}
-                {label}
+                    : null}
+                {this.props.label} {this.props.tooltip? <a className="tooltipped" data-position="bottom" data-delay="50" data-tooltip={this.props.tooltip}><i className="material-icons">info_outline</i></a>:null}
             </label>
+            {this.props.required && this.props.enableErrorMessage && this.state.showError && this.state.error ? <p className="error-message">{this.state.error}</p> : null}
         </div>
     }
 }
-
-InputBox.propTypes = {
-    placeholder: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    inputValue: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.object.isRequired]),
-    inputId: PropTypes.string.isRequired,
-    changeBox: PropTypes.func.isRequired,
-    password:  PropTypes.bool,
-    required:  PropTypes.bool,
-    isNumber:  PropTypes.bool,
-    itemLength:  PropTypes.number,
-    isAValue:  PropTypes.bool,
-    itemMaxLength:  PropTypes.number
-};

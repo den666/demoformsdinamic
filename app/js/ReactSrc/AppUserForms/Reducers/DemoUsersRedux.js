@@ -4,19 +4,20 @@
 
 
 import ReduxConstants from '../../Utils/Constants/ReduxConstants'
+import UsersFormsList from '../../Utils/Constants/UserFormsConstants'
 
 const initialState = {
     role: 0,
-    userFormFields: null,
-    userFormData: {},
-    userFormEndPoint: '',
+    formsList: UsersFormsList.forms,
+    userFormData: null,
+    userPostFormData: {},
     userFormStatus: ReduxConstants.LoadingStatus.LOADING_INACTIVE
 };
 
 export default function Login(state = initialState, action) {
     switch (action.type) {
-        // case Constants.LoginActions.GET_RESPONSE:
-        //     return {...state, accessToken : action.accessToken, role: action.role};
+        case ReduxConstants.FormUserActions.SET_FORM_ACTIVE_DATA:
+            return {...state, userFormData: action.userFormData};
         // case Constants.LoginActions.LOGIN_STATUS:
         //     return {...state, loginStatus : action.status};
         // case Constants.LoginActions.JSON_RESPONSE:

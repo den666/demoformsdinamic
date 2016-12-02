@@ -9,13 +9,16 @@ import { browserHistory } from 'react-router';
 import UsersTypesList from './../Sections/section.usersTypesList'
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
+        formList: state.formsUsersData.formsList
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        gotoPage: (url) =>{
+            browserHistory.push(url);
+        }
     }
 };
 
